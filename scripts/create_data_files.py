@@ -19,7 +19,8 @@ startDateInputArray = startDateInput.split("/")
 startDate = datetime.datetime(int(startDateInputArray[0]), int(startDateInputArray[1]), int(startDateInputArray[2]))
 
 # check if target directory exists, else create one
-targetdir = os.path.join(os.getcwd(), 'dailyfiles')
+os.chdir('../mysite/dataengineering/static/dataengineering')
+targetdir = os.getcwd()
 if os.path.isdir(targetdir) is False:
     os.mkdir(targetdir)
 
