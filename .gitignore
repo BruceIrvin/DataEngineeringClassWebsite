@@ -1,4 +1,3 @@
-mysite/dataengineering/static/dataengineering/day*.json
 *.idea*
 *.tsv
 scripts/inputfiles/*

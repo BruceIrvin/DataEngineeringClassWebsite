@@ -5,7 +5,7 @@ from datetime import datetime
 
 def index(request):
     courseStartDate = datetime(2020, 12, 24)  # date on which first file is served
-    file_number = (datetime.today() - courseStartDate).days + 2
+    file_number = (datetime.today() - courseStartDate).days + 1
     filename = 'day%s' % file_number + '.json'
     file_path = os.path.join('dataengineering', 'static', 'dataengineering', filename)
     if os.path.exists(file_path):
