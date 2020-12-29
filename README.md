@@ -22,5 +22,6 @@ Steps to set up the website:
 	10. Type: cd ../mysite
 	11. Type: "nohup python3 manage.py runserver 0.0.0.0:8000 &". This will start the django
 	server in the background and would continue to run after you close the window.
+	12. On your browser, go to url: "http://[your_vm_external_ipaddress]:8000/getData"
 
 
