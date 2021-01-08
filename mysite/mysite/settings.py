@@ -24,10 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '7ld8mx)g2cf@-uhqx$*vo!=r6(o@wq_3(+ck!7(^4bs%a%2bh2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['34.83.247.57']
+ALLOWED_HOSTS = ['34.83.136.192']
 
+# Enable Timezone support
+USE_TZ = True
 
 # Application definition
 
@@ -106,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Pacific'
 
 USE_I18N = True
 
