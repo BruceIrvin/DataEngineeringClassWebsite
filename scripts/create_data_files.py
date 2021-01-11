@@ -51,7 +51,7 @@ for filename in listdir(inputdir):
     for key in dict.keys():
         targetfile = os.path.join(targetdir, 'day' + str(key) + '.json')
         # write data to file in json format
-        with open(targetfile, 'w') as jsonfile:
+        with open(targetfile, 'a') as jsonfile:
             json.dump(dict[key], jsonfile, indent=2)
             jsonfile.close()
 
