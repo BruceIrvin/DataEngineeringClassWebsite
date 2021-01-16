@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('getBreadCrumbData/', include('dataengineering.urls')),
+    path('', include('dataengineering.urls')),
+    # path('getCadData/', include('dataengineering.urls')),
     # path('admin/', admin.site.urls),
 ]

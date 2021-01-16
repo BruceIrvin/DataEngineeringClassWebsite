@@ -2,6 +2,7 @@ from django.http import HttpResponse, Http404
 import os
 from datetime import datetime
 from django.template import loader
+from django.shortcuts import render
 
 def getBreadCrumbData(request):
     courseStartDate = datetime(2021, 1, 11)  # (yyyy-m-d) date on which first file is served
@@ -26,9 +27,8 @@ def getCadData(request):
         return HttpResponse('<h1>Course has not yet begun.</h1>')
     file_number = (today - courseStartDate).days + 1
     filename = 'cad_table_day_%s' % file_number + '.html'
-    file_path = os.path.join('dataengineering', 'static', 'dataengineering', 'cad', filename)
+    file_path = os.path.join('dataengineering', 'templates', filename)
     if os.path.exists(file_path):
-        template = loader.get_template(file_path)
-        return HttpResponse(template.render)
+        return render(request, filename)
     raise Http404
 
