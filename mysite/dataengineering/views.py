@@ -1,9 +1,9 @@
-from django.http import HttpResponse, FileResponse, Http404, StreamingHttpResponse
+from django.http import HttpResponse, Http404
 import os
 from datetime import datetime
-from django.utils import timezone
+from django.template import loader
 
-def index(request):
+def getBreadCrumbData(request):
     courseStartDate = datetime(2021, 1, 11)  # (yyyy-m-d) date on which first file is served
     today = datetime.today()
     if today < courseStartDate:
@@ -18,3 +18,17 @@ def index(request):
             response['Content-Disposition'] = 'attachment; filename=%s'%(datetime.today().strftime('%Y-%m-%d'))+'.json'
             return response
     raise Http404
+
+def getCadData(request):
+    courseStartDate = datetime(2021, 1, 11)  # (yyyy-m-d) date on which first file is served
+    today = datetime.today()
+    if today < courseStartDate:
+        return HttpResponse('<h1>Course has not yet begun.</h1>')
+    file_number = (today - courseStartDate).days + 1
+    filename = 'cad_table_day_%s' % file_number + '.html'
+    file_path = os.path.join('dataengineering', 'static', 'dataengineering', 'cad', filename)
+    if os.path.exists(file_path):
+        template = loader.get_template(file_path)
+        return HttpResponse(template.render)
+    raise Http404
+

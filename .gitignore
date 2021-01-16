@@ -4,3 +4,4 @@ scripts/inputfiles/*
 *.tsv
 *.pyc
 *.json
+*.html
