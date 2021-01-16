@@ -16,7 +16,7 @@ startDateInputArray = startDateInput.split("/")
 startDate = datetime.datetime(int(startDateInputArray[0]), int(startDateInputArray[1]), int(startDateInputArray[2]))
 
 # check if target directory exists, else create one
-os.chdir('../mysite/dataengineering/static/dataengineering/cad')
+os.chdir('../mysite/dataengineering/templates')
 targetdir = os.getcwd()
 if os.path.isdir(targetdir) is False:
     os.mkdir(targetdir)
