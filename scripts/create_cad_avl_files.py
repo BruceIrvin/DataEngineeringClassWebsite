@@ -37,36 +37,51 @@ for filename in listdir(inputdir):
     for line in data[1:]:
         row = line.split(",")
         recordDate = datetime.datetime.strptime(row[0], '%Y-%m-%d')
+        trip_number = row[7]
         diff = (recordDate - startDate).days + 1
         if diff in dict.keys():
-            data = dict[diff]
+            day_data = dict[diff]
         else:
-            data = []
-        data.append(row)
-        dict[diff] = data
+            day_data = {}
+        if trip_number in day_data.keys():
+            day_trip_data = day_data[trip_number]
+        else:
+            day_trip_data = []
+        day_trip_data.append(row)
+        day_data[trip_number] = day_trip_data
+        dict[diff] = day_data
     csv_file.close()
 
 print('Data Read Completed from file', filename, '.Splitting into files per day..\n')
-for key in dict.keys():
-    targetfile = os.path.join(targetdir, 'cad_table_day_' + str(key) + '.html')
+for day_data in dict.keys():
+    targetfile = os.path.join(targetdir, 'cad_table_day_' + str(day_data) + '.html')
     # write data to file in html table format
     with open(targetfile, 'w') as htmlfile:
-        table = "<table>\n"
-        # Create the table's column headers
-        table += "  <tr>\n"
-        for column in header:
-            table += "    <th>{0}</th>\n".format(column.strip())
-        table += "  </tr>\n"
-
-        # Create the table's row data
-        for row in dict[key]:
+        for trip_number in dict[day_data].keys():
+            table_heading = "<h3>Stop Events for trip {0} for today</h3></br>".format(trip_number)
+            htmlfile.writelines(table_heading)
+            table = "<table>\n"
+            # Create the table's column headers
             table += "  <tr>\n"
-            for column in row:
-                table += "    <td>{0}</td>\n".format(column.strip())
+            for column in header:
+                # skip the date and trip_number columns
+                if column.strip() in "service_date, trip_number, trip_id":
+                    continue
+                table += "    <th>{0}</th>\n".format(column.strip())
             table += "  </tr>\n"
 
-        table += "</table>"
-        htmlfile.writelines(table)
+            # Create the table's row data
+            for row in dict[day_data][trip_number]:
+                table += "  <tr>\n"
+                cols = len(row)
+                for i in range(0, cols):
+                    if i in (0, 7, cols-1):
+                        continue
+                    table += "    <td>{0}</td>\n".format(row[i].strip())
+                table += "  </tr>\n"
+
+            table += "</table></br>"
+            htmlfile.writelines(table)
         htmlfile.close()
 
 print("All Files created successfully!")
