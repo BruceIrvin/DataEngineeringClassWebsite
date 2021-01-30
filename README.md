@@ -28,3 +28,28 @@ Steps to set up the website:
 	13. On your browser, go to url: "http://rbi.ddns.net/getBreadCrumbData". rbi.ddns.net is just
 	an alias domain name and may change in the future.
 
+## 
+Steps to make the website fault taulerant using systemctl:
+
+    1. Run: sudo nano /etc/systemd/system/django.service
+        a. Copy the below text in the file:
+            [Unit]
+            Description=django daemon
+            After=network.target
+            
+            [Service]
+            User=aso2
+            Group=www-data
+            PIDFile=/home/aso2/DataEngineeringWebsite/mysite/jobs.pid
+            WorkingDirectory=/home/aso2/DataEngineeringWebsite/mysite
+            ExecStart=/usr/bin/python3 manage.py runserver 0.0.0.0:8000
+            Restart=on-failure
+            RestartSec=5s
+            
+            [Install]
+            WantedBy=multi-user.target
+    2. Replace "aso2" with your VM username
+    3. Run: sudo systemctl enable django (This loads the service. doesn't start it yet)
+    4. Run: sudo systemctl start django (This starts the service)
+    5. Run this to find status of service: sudo systemctl status django
+    6. Run this after service file change: sudo systemctl daemon-reload
