@@ -18,6 +18,4 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('dataengineering.urls')),
-    # path('getCadData/', include('dataengineering.urls')),
-    # path('admin/', admin.site.urls),
 ]

@@ -57,6 +57,14 @@ for day_data in dict.keys():
     targetfile = os.path.join(targetdir, 'cad_table_day_' + str(day_data) + '.html')
     # write data to file in html table format
     with open(targetfile, 'w') as htmlfile:
+        # write data record date as heading once
+        for trip in dict[day_data].values():
+            for row in trip:
+                heading = "<h1> C-Tran CAD/AVL data for {0} </h1></br>".format(row[0].strip())
+                break
+            break
+        htmlfile.writelines(heading)
+
         for trip_number in dict[day_data].keys():
             table_heading = "<h3>Stop Events for trip {0} for today</h3></br>".format(trip_number)
             htmlfile.writelines(table_heading)
