@@ -22,10 +22,12 @@ Steps to set up the website:
 	will create the daily json files starting from day1.json, day2.json and so on.
 	10. Run: python3 test_data_files.py to check if the json files contains the correct
 	number of records.
-	11. Run: cd ../mysite
-	12. Run: "nohup python3 manage.py runserver 0.0.0.0:8000 &". This will start the django
+	11. Create a new folder in mysite/dataengineering called templates. Run: python3 create_cad_avl.py This will create the HTML files for cad/avl
+	data in the folder mysite/dataengineering/templates.
+	12. Run: cd ../mysite
+	13. Run: "nohup python3 manage.py runserver 0.0.0.0:8000 &". This will start the django
 	server in the background and would continue to run after you close the window.
-	13. On your browser, go to url: "http://rbi.ddns.net/getBreadCrumbData". rbi.ddns.net is just
+	14. On your browser, go to url: "http://rbi.ddns.net/getBreadCrumbData". rbi.ddns.net is just
 	an alias domain name and may change in the future.
 
 ## 
