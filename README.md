@@ -1,4 +1,6 @@
 # DataEngineeringWebsite
+This is Bruce's fork of Aman's original project. Made the fork because Aman has moved on and is no longer working on this little project.
+
 The website serves one data file in json format each day.
 
 ## 
